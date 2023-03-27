@@ -1,0 +1,6 @@
+.main {
+  background-color: red;
+  display: flex;
+  flex: 1 0 75%;
+  flex-direction: column;
+}
