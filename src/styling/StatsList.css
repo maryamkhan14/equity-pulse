@@ -1,0 +1,10 @@
+.stats-list {
+  display: flex;
+}
+.stats-list table {
+  display: flex;
+  gap: 1em;
+  flex-direction: column;
+  flex: 1 1 auto;
+  align-items: space-between;
+}

@@ -7,7 +7,7 @@ const extractRelevantStats = (dataset) => {
     reporting_pop: population,
   } = dataset;
   return {
-    median: median.toFixed(2),
+    median: getMedian(median),
     decileOneAvg: calculateDecileAvg(decileOneShare, population, mean).toFixed(
       2
     ),
@@ -16,6 +16,9 @@ const extractRelevantStats = (dataset) => {
     ),
     estTotal: calculateEstTotal(population, mean),
   };
+};
+const getMedian = (median) => {
+  return median == undefined ? "No median recorded." : median.toFixed(2);
 };
 const calculateEstTotal = (population, mean) => {
   return new Intl.NumberFormat().format((population * mean).toFixed(2));

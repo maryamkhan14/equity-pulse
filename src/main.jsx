@@ -5,9 +5,7 @@ import { StatsContextProvider } from "./context/StatsContext";
 import "./index.css";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <React.StrictMode>
-    <StatsContextProvider>
-      <App />
-    </StatsContextProvider>
-  </React.StrictMode>
+  <StatsContextProvider>
+    <App />
+  </StatsContextProvider>
 );
