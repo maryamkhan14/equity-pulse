@@ -1,0 +1,14 @@
+.about {
+  display: flex;
+  flex-direction: column;
+  flex: 1 1 95%;
+  border-top: 1px solid black;
+  margin-top: 2em;
+  padding: 0.3em 0;
+}
+.about > a {
+  color: #646cff;
+}
+.about a:hover {
+  cursor: pointer;
+}
