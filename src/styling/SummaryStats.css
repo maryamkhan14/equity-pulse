@@ -1,4 +1,5 @@
 .summary-stats {
   background-color: greenyellow;
   display: flex;
+  flex-wrap: wrap;
 }
