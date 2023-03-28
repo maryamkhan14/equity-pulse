@@ -1,10 +1,10 @@
 .stats-list {
   display: flex;
-  align-self: center;
+  justify-content: center;
 }
 .stats-list table {
   flex: 1 1 auto;
-  max-width: 95%;
+  max-width: 100%;
   border-collapse: separate;
   border-spacing: 0 1em;
 }
@@ -34,4 +34,22 @@ tr {
 }
 .stats-list tbody > tr:last-child td:last-child {
   border-bottom-right-radius: 10px;
+}
+@media screen and (max-width: 600px) {
+  .highlighted-stat.estimated-total h3 {
+    font-size: 5.5vw;
+  }
+  .stats-list th,
+  td {
+    font-size: 3vw;
+  }
+}
+@media screen and (min-width: 600px) and (max-width: 768px) {
+  .highlighted-stat.estimated-total h3 {
+    font-size: 5.5vw;
+  }
+  .stats-list th,
+  td {
+    font-size: 2vw;
+  }
 }

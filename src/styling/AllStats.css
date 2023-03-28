@@ -3,5 +3,7 @@
   flex: 1 1 auto;
   flex-direction: column;
   flex-wrap: wrap;
+  align-items: space-around;
   margin-top: 2em;
+  padding: 1em;
 }

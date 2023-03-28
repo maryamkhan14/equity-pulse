@@ -6,7 +6,7 @@
   border-radius: 0.5em;
   box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
     rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
-  flex: 1 1 25%;
+  flex: 1 1 auto;
   gap: 0.7em;
   padding: 1em 0.5em;
   margin: 0.5em;
@@ -16,12 +16,21 @@
   flex: 1 0 95%;
   padding: 1em 0.25em;
 }
+
 .highlighted-stat p {
   text-align: center;
   font-size: 0.9em;
   line-height: 1.2rem;
   color: #828080;
 }
+
 .highlighted-stat h3 {
   font-size: 3rem;
+  text-align: center;
+}
+
+@media screen and (max-width: 768px) {
+  .highlighted-stat.estimated-total h3 {
+    font-size: 5.5vw;
+  }
 }

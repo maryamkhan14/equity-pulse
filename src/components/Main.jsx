@@ -14,7 +14,7 @@ const Main = () => {
       let { data: highlighted } = await fetchCountryStats("USA");
       let { data: all } = await fetchCountryStats("all");
       dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: highlighted[0] });
-      dispatch({ type: "POPULATE_FULL_DATASET", payload: all });
+      dispatch({ type: "POPULATE_DISPLAY_ORIGINAL_DATASETS", payload: all });
     };
     initialFetch().then(() =>
       dispatch({ type: "TOGGLE_LOADING", payload: false })

@@ -4,7 +4,7 @@ import { StatsContext } from "../context/StatsContext";
 import extractRelevantDetails from "../utilities/extractRelevantDetails";
 import "../styling/StatsList.css";
 const StatsList = () => {
-  const { fullDataset } = useContext(StatsContext);
+  const { displayDataset } = useContext(StatsContext);
 
   return (
     <div className="stats-list">
@@ -18,8 +18,8 @@ const StatsList = () => {
           </tr>
         </thead>
         <tbody>
-          {Object.keys(fullDataset).length > 0 &&
-            fullDataset.map((individualDataset) => {
+          {Object.keys(displayDataset).length > 0 &&
+            displayDataset.map((individualDataset) => {
               let {
                 median,
                 decileOneAvg,
@@ -39,7 +39,7 @@ const StatsList = () => {
               );
             })}
 
-          {Object.keys(fullDataset).length == 0 && (
+          {Object.keys(displayDataset).length == 0 && (
             <tr>
               <td>No data yet!</td>
             </tr>
