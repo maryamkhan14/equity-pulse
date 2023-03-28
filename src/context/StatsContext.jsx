@@ -4,9 +4,12 @@ export const StatsContext = createContext();
 export const statsContextReducer = (state, action) => {
   switch (action.type) {
     case "TOGGLE_LOADING":
+      console.log("toggling from ", state.loading, "to ", !state.loading);
       return { ...state, loading: !state.loading };
-    case "UPDATE_DATASET":
-      return { ...state, currentDataset: action.payload };
+    case "UPDATE_HIGHLIGHTED_DATASET":
+      return { ...state, highlightedDataset: action.payload };
+    case "POPULATE_FULL_DATASET":
+      return { ...state, fullDataset: action.payload };
     default:
       return state;
   }
@@ -14,7 +17,8 @@ export const statsContextReducer = (state, action) => {
 export const StatsContextProvider = ({ children }) => {
   const [state, dispatch] = useReducer(statsContextReducer, {
     loading: true,
-    currentDataset: {},
+    highlightedDataset: {},
+    fullDataset: {},
   });
   return (
     <StatsContext.Provider value={{ ...state, dispatch }}>

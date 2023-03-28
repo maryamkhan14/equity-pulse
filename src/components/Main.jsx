@@ -8,8 +8,9 @@ import defaultPovertyQueryParams from "../utilities/defaultPovertyQueryParams";
 import { StatsContext } from "../context/StatsContext";
 
 const Main = () => {
-  const { dispatch } = useContext(StatsContext);
-  const fetchInitial = async () => {
+  const { dispatch, highlightedDataset, fullDataset, loading } =
+    useContext(StatsContext);
+  const fetchInitialHighlighted = async () => {
     let usaStats = await axios({
       method: "GET",
       url: `
@@ -20,15 +21,33 @@ const Main = () => {
     });
     return usaStats;
   };
+  const fetchInitialAll = async () => {
+    let allStats = await axios({
+      method: "GET",
+      url: `
+    https://api.worldbank.org/pip/v1/pip?country=all${defaultPovertyQueryParams}`,
+      headers: {
+        Accept: "*/*",
+      },
+    });
+    return allStats;
+  };
   useEffect(() => {
     const initialFetch = async () => {
-      let { data } = await fetchInitial();
-      console.log(...data);
+      let { data: highlighted } = await fetchInitialHighlighted();
+      let { data: all } = await fetchInitialAll();
+      dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: highlighted[0] });
+      dispatch({ type: "POPULATE_FULL_DATASET", payload: all[0] });
     };
     initialFetch();
   }, []);
+
+  useEffect(() => {
+    dispatch({ type: "TOGGLE_LOADING", payload: null });
+  }, [fullDataset]);
+
   return (
-    <div className="main">
+    <div className={`main ${loading && "loading"}`}>
       <SummaryStats />
       <AllStats />
     </div>

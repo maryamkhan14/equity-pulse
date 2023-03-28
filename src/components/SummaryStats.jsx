@@ -3,9 +3,9 @@ import "../styling/SummaryStats.css";
 import { useEffect, useContext } from "react";
 import { StatsContext } from "../context/StatsContext";
 const SummaryStats = () => {
-  const { currentDataset } = useContext(StatsContext);
+  const { loading } = useContext(StatsContext);
 
-  return <div className="summary-stats">SummaryStats</div>;
+  return <div className="summary-stats">{loading && "loading"}Summary</div>;
 };
 
 export default SummaryStats;
