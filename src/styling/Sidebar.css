@@ -1,5 +1,5 @@
 .sidebar {
-  background-color: beige;
+  background-color: #ececec;
   display: flex;
   flex-direction: column;
   flex: 1 1 25%;
@@ -14,5 +14,5 @@
   flex-direction: column;
   gap: 1em;
   margin-top: 1em;
-  font-size: 1.5em;
+  font-size: 1.3em;
 }

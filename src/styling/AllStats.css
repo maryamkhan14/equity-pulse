@@ -1,7 +1,7 @@
 .all-stats {
-  background-color: aqua;
   display: flex;
   flex: 1 1 auto;
   flex-direction: column;
   flex-wrap: wrap;
+  margin-top: 2em;
 }
