@@ -1,8 +1,7 @@
-import "./extractRelevantStats";
-import extractRelevantStats from "./extractRelevantStats";
+import calculateRelevantStats from "./calculateRelevantStats";
 const extractRelevantDetails = (dataset) => {
   return {
-    ...extractRelevantStats(dataset),
+    ...calculateRelevantStats(dataset),
     country_code: dataset.country_code,
     country_name: dataset.country_name,
   };
