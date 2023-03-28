@@ -3,39 +3,16 @@ import "../styling/Main.css";
 import AllStats from "./AllStats";
 import SummaryStats from "./SummaryStats";
 import { useContext, useEffect } from "react";
-import axios from "axios";
-import defaultPovertyQueryParams from "../utilities/defaultPovertyQueryParams";
+import fetchCountryStats from "../utilities/fetchData";
 import { StatsContext } from "../context/StatsContext";
 
 const Main = () => {
-  const { dispatch, highlightedDataset, fullDataset, loading } =
-    useContext(StatsContext);
-  const fetchInitialHighlighted = async () => {
-    let usaStats = await axios({
-      method: "GET",
-      url: `
-    https://api.worldbank.org/pip/v1/pip?country=USA${defaultPovertyQueryParams}`,
-      headers: {
-        Accept: "*/*",
-      },
-    });
-    return usaStats;
-  };
-  const fetchInitialAll = async () => {
-    let allStats = await axios({
-      method: "GET",
-      url: `
-    https://api.worldbank.org/pip/v1/pip?country=all${defaultPovertyQueryParams}`,
-      headers: {
-        Accept: "*/*",
-      },
-    });
-    return allStats;
-  };
+  const { dispatch, fullDataset, loading } = useContext(StatsContext);
+
   useEffect(() => {
     const initialFetch = async () => {
-      let { data: highlighted } = await fetchInitialHighlighted();
-      let { data: all } = await fetchInitialAll();
+      let { data: highlighted } = await fetchCountryStats("USA");
+      let { data: all } = await fetchCountryStats("all");
       dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: highlighted[0] });
       dispatch({ type: "POPULATE_FULL_DATASET", payload: all[0] });
     };
