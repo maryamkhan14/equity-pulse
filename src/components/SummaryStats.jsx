@@ -13,12 +13,14 @@ const SummaryStats = () => {
   const [median, setMedian] = useState(0);
 
   useEffect(() => {
-    let { median, decileOneAvg, decileTenAvg, estTotal } =
-      extractRelevantStats(highlightedDataset);
-    setDecileOneAvg(decileOneAvg);
-    setDecileTenAvg(decileTenAvg);
-    setEstTotal(estTotal);
-    setMedian(median);
+    if (Object.keys(highlightedDataset).length > 0) {
+      let { median, decileOneAvg, decileTenAvg, estTotal } =
+        extractRelevantStats(highlightedDataset);
+      setDecileOneAvg(decileOneAvg);
+      setDecileTenAvg(decileTenAvg);
+      setEstTotal(estTotal);
+      setMedian(median);
+    }
   }, [highlightedDataset]);
 
   return (
