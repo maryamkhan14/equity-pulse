@@ -12,3 +12,6 @@
 .about a:hover {
   cursor: pointer;
 }
+.about h4 {
+  margin-top: 1em;
+}
