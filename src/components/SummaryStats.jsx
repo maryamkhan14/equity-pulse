@@ -3,7 +3,7 @@ import "../styling/SummaryStats.css";
 import { useEffect, useContext, useState } from "react";
 import { StatsContext } from "../context/StatsContext";
 import HighlightedStat from "./HighlightedStat";
-import extractRelevantStats from "../utilities/extractRelevantStats";
+import extractRelevantDetails from "../utilities/extractRelevantDetails";
 
 const SummaryStats = () => {
   const { highlightedDataset } = useContext(StatsContext);
@@ -11,20 +11,33 @@ const SummaryStats = () => {
   const [decileTenAvg, setDecileTenAvg] = useState(0);
   const [estTotal, setEstTotal] = useState(0);
   const [median, setMedian] = useState(0);
+  const [countryId, setCountryId] = useState([]);
 
   useEffect(() => {
     if (Object.keys(highlightedDataset).length > 0) {
-      let { median, decileOneAvg, decileTenAvg, estTotal } =
-        extractRelevantStats(highlightedDataset);
+      let {
+        median,
+        decileOneAvg,
+        decileTenAvg,
+        estTotal,
+        country_code,
+        country_name,
+      } = extractRelevantDetails(highlightedDataset);
       setDecileOneAvg(decileOneAvg);
       setDecileTenAvg(decileTenAvg);
       setEstTotal(estTotal);
       setMedian(median);
+      setCountryId([country_code, country_name]);
     }
   }, [highlightedDataset]);
 
   return (
     <div className="summary-stats">
+      <HighlightedStat
+        info="country-id"
+        title="country"
+        stat={`${countryId[0]} (${countryId[1]})`}
+      />
       <HighlightedStat
         info="estimated-total"
         title="estimated total income/expenditure per day"

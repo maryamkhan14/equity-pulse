@@ -1,7 +1,7 @@
 import React from "react";
 import { useContext } from "react";
 import { StatsContext } from "../context/StatsContext";
-import extractRelevantStats from "../utilities/extractRelevantStats";
+import extractRelevantDetails from "../utilities/extractRelevantDetails";
 import "../styling/StatsList.css";
 const StatsList = () => {
   const { fullDataset } = useContext(StatsContext);
@@ -13,16 +13,20 @@ const StatsList = () => {
           <tr>
             <th>Country</th>
             <th>Median</th>
-            <th>Income/Consumption - Poorest 10%</th>
-            <th>Income/Consumption - Richest 10%</th>
+            <th>Daily Income/Expenditure (Poorest 10%)</th>
+            <th>Daily Income/Expenditure (Richest 10%)</th>
           </tr>
         </thead>
         <tbody>
           {Object.keys(fullDataset).length > 0 &&
             fullDataset.map((individualDataset) => {
-              let { country_name, country_code } = individualDataset;
-              let { median, decileOneAvg, decileTenAvg } =
-                extractRelevantStats(individualDataset);
+              let {
+                median,
+                decileOneAvg,
+                decileTenAvg,
+                country_name,
+                country_code,
+              } = extractRelevantDetails(individualDataset);
               return (
                 <tr key={country_code}>
                   <td>
