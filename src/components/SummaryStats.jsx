@@ -3,6 +3,8 @@ import "../styling/SummaryStats.css";
 import { useEffect, useContext, useState } from "react";
 import { StatsContext } from "../context/StatsContext";
 import HighlightedStat from "./HighlightedStat";
+import extractRelevantStats from "../utilities/extractRelevantStats";
+
 const SummaryStats = () => {
   const { highlightedDataset } = useContext(StatsContext);
   const [decileOneAvg, setDecileOneAvg] = useState(0);
@@ -11,26 +13,13 @@ const SummaryStats = () => {
   const [median, setMedian] = useState(0);
 
   useEffect(() => {
-    let {
-      decile1: decileOneShare,
-      decile10: decileTenShare,
-      median,
-      mean,
-      reporting_pop: population,
-    } = highlightedDataset;
-    setDecileOneAvg(
-      calculateDecileAvg(decileOneShare, population, mean).toFixed(2)
-    );
-    setDecileTenAvg(
-      calculateDecileAvg(decileTenShare, population, mean).toFixed(2)
-    );
-    setEstTotal(new Intl.NumberFormat().format(population * mean));
+    let { median, decileOneAvg, decileTenAvg, estTotal } =
+      extractRelevantStats(highlightedDataset);
+    setDecileOneAvg(decileOneAvg);
+    setDecileTenAvg(decileTenAvg);
+    setEstTotal(estTotal);
     setMedian(median);
   }, [highlightedDataset]);
-
-  const calculateDecileAvg = (share, population, mean) => {
-    return (population * mean * share) / (0.1 * population);
-  };
 
   return (
     <div className="summary-stats">
