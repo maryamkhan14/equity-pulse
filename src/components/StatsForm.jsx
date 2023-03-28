@@ -2,27 +2,39 @@ import React from "react";
 import "../styling/StatsForm.css";
 import { useState, useContext, useEffect } from "react";
 import fetchCountryStats from "../utilities/fetchData";
-import isValidCode from "../utilities/validateCountry";
+import pairings from "../constants/countryPairings";
 import { StatsContext } from "../context/StatsContext";
 const StatsForm = () => {
   const [country, setCountry] = useState("");
   const { loading, dispatch } = useContext(StatsContext);
+
   useEffect(() => {
     updateDatasets();
   }, [country]);
   const updateDatasets = async () => {
-    if (isValidCode(country)) {
-      let { data: highlighted } = await fetchCountryStats(country);
-      dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: highlighted[0] });
+    if (!loading) {
+      let possibleMatches = Object.keys(pairings).filter((countryName) =>
+        countryName.includes(country)
+      );
+      if (pairings[country] || possibleMatches.length == 1) {
+        let { data: highlighted } = await fetchCountryStats(
+          pairings[possibleMatches[0]]
+        );
+        dispatch({ type: "TOGGLE_LOADING", payload: true });
+        dispatch({
+          type: "UPDATE_HIGHLIGHTED_DATASET",
+          payload: highlighted[0],
+        });
+      }
       dispatch({ type: "FILTER_DISPLAY_DATASET", payload: country });
-    } else {
-      dispatch({ type: "RESET_FILTER", payload: null });
     }
   };
   return (
     <form className="stats-form">
       <div>
-        <label htmlFor="search-country">search country</label>
+        <label htmlFor="search-country">
+          {loading && "loading"}search country
+        </label>
         <input
           type="text"
           htmlFor="search-country"

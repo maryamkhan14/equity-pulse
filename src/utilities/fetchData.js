@@ -1,5 +1,5 @@
 import axios from "axios";
-import defaultPovertyQueryParams from "../utilities/defaultPovertyQueryParams";
+import defaultPovertyQueryParams from "../constants/defaultPovertyQueryParams";
 let fetchCountryStats = async (countryCode) => {
   let singleCountryStats = await axios({
     method: "GET",

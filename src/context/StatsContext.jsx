@@ -6,7 +6,7 @@ export const statsContextReducer = (state, action) => {
     case "TOGGLE_LOADING":
       return { ...state, loading: action.payload };
     case "UPDATE_HIGHLIGHTED_DATASET":
-      return { ...state, highlightedDataset: action.payload };
+      return { ...state, highlightedDataset: action.payload, loading: false };
     case "POPULATE_DISPLAY_ORIGINAL_DATASETS":
       return {
         ...state,
@@ -16,9 +16,10 @@ export const statsContextReducer = (state, action) => {
     case "FILTER_DISPLAY_DATASET":
       return {
         ...state,
-        displayDataset: state.originalDataset.filter(
-          (individualDataset) =>
-            individualDataset.country_code == action.payload
+        displayDataset: state.originalDataset.filter((individualDataset) =>
+          individualDataset.country_name
+            .toLocaleLowerCase()
+            .includes(action.payload)
         ),
       };
     case "RESET_FILTER":
