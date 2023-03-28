@@ -7,7 +7,7 @@ import fetchCountryStats from "../utilities/fetchData";
 import { StatsContext } from "../context/StatsContext";
 
 const Main = () => {
-  const { dispatch, fullDataset, loading } = useContext(StatsContext);
+  const { dispatch, loading } = useContext(StatsContext);
 
   useEffect(() => {
     const initialFetch = async () => {
@@ -16,12 +16,10 @@ const Main = () => {
       dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: highlighted[0] });
       dispatch({ type: "POPULATE_FULL_DATASET", payload: all[0] });
     };
-    initialFetch();
+    initialFetch().then(() =>
+      dispatch({ type: "TOGGLE_LOADING", payload: false })
+    );
   }, []);
-
-  useEffect(() => {
-    dispatch({ type: "TOGGLE_LOADING", payload: null });
-  }, [fullDataset]);
 
   return (
     <div className={`main ${loading && "loading"}`}>
