@@ -3,21 +3,24 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-around;
-  border: 1px solid black;
+  border-radius: 0.5em;
+  box-shadow: rgba(67, 71, 85, 0.27) 0px 0px 0.25em,
+    rgba(90, 125, 188, 0.05) 0px 0.25em 1em;
   flex: 1 1 25%;
-  gap: 0.5em;
-  padding: 0.5em;
+  gap: 0.7em;
+  padding: 1em 0.5em;
   margin: 0.5em;
 }
 
 .highlighted-stat.estimated-total {
   flex: 1 0 95%;
-  padding: 0.25em;
+  padding: 1em 0.25em;
 }
 .highlighted-stat p {
   text-align: center;
-  font-size: 1.2em;
-  line-height: 1.3em;
+  font-size: 0.9em;
+  line-height: 1.2em;
+  color: #828080;
 }
 .highlighted-stat h3 {
   font-size: 3em;
