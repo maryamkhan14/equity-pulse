@@ -41,7 +41,7 @@ const StatsList = () => {
 
           {Object.keys(displayDataset).length == 0 && (
             <tr>
-              <td>No data yet!</td>
+              <td colSpan={4}>No data yet!</td>
             </tr>
           )}
         </tbody>
