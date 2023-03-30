@@ -22,16 +22,16 @@ tr {
 .stats-list tbody > tr {
   background-color: #ececec;
 }
-.stats-list tbody > tr:first-child td:first-child {
+.stats-list tbody > tr td:first-child {
   border-top-left-radius: 10px;
 }
-.stats-list tbody > tr:first-child td:last-child {
+.stats-list tbody > tr td:last-child {
   border-top-right-radius: 10px;
 }
-.stats-list tbody > tr:last-child td:first-child {
+.stats-list tbody > tr td:first-child {
   border-bottom-left-radius: 10px;
 }
-.stats-list tbody > tr:last-child td:last-child {
+.stats-list tbody > tr td:last-child {
   border-bottom-right-radius: 10px;
 }
 @media screen and (max-width: 600px) {
