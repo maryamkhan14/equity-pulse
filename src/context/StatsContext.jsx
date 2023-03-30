@@ -6,7 +6,21 @@ export const statsContextReducer = (state, action) => {
     case "TOGGLE_LOADING":
       return { ...state, loading: action.payload };
     case "UPDATE_HIGHLIGHTED_DATASET":
-      return { ...state, highlightedDataset: action.payload, loading: false };
+      console.log(action.payload);
+      console.log(state.originalDataset);
+      console.log(
+        state.originalDataset.filter(
+          (individualDataset) =>
+            individualDataset.country_code == action.payload
+        )
+      );
+      return {
+        ...state,
+        highlightedDataset: state.originalDataset.filter(
+          (individualDataset) =>
+            individualDataset.country_code == action.payload
+        )[0],
+      };
     case "POPULATE_DISPLAY_ORIGINAL_DATASETS":
       return {
         ...state,
@@ -19,7 +33,7 @@ export const statsContextReducer = (state, action) => {
         displayDataset: state.originalDataset.filter((individualDataset) =>
           individualDataset.country_name
             .toLocaleLowerCase()
-            .includes(action.payload)
+            .includes(action.payload.toLocaleLowerCase())
         ),
       };
     case "RESET_FILTER":

@@ -10,11 +10,15 @@ const Main = () => {
   const { dispatch, loading } = useContext(StatsContext);
 
   useEffect(() => {
+    console.log("main called");
     const initialFetch = async () => {
-      let { data: highlighted } = await fetchCountryStats("USA");
-      let { data: all } = await fetchCountryStats("all");
-      dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: highlighted[0] });
-      dispatch({ type: "POPULATE_DISPLAY_ORIGINAL_DATASETS", payload: all });
+      let all = await fetchCountryStats("all");
+      await dispatch({
+        type: "POPULATE_DISPLAY_ORIGINAL_DATASETS",
+        payload: all,
+      });
+
+      dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: "USA" });
     };
     initialFetch().then(() =>
       dispatch({ type: "TOGGLE_LOADING", payload: false })

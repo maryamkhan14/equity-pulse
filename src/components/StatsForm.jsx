@@ -17,13 +17,13 @@ const StatsForm = () => {
         countryName.includes(country)
       );
       if (pairings[country] || possibleMatches.length == 1) {
-        let { data: highlighted } = await fetchCountryStats(
-          pairings[possibleMatches[0]]
-        );
-        dispatch({ type: "TOGGLE_LOADING", payload: true });
+        dispatch({
+          type: "TOGGLE_LOADING",
+          payload: true,
+        });
         dispatch({
           type: "UPDATE_HIGHLIGHTED_DATASET",
-          payload: highlighted[0],
+          payload: pairings[possibleMatches[0]],
         });
       }
       dispatch({ type: "FILTER_DISPLAY_DATASET", payload: country });
@@ -33,7 +33,7 @@ const StatsForm = () => {
     <form className="stats-form">
       <div>
         <label htmlFor="search-country">
-          {loading && "loading"}search country
+          {loading ? "loading..." : "search country"}
         </label>
         <input
           type="text"
