@@ -6,7 +6,7 @@ import HighlightedStat from "./HighlightedStat";
 import extractRelevantDetails from "../utilities/extractRelevantDetails";
 
 const SummaryStats = () => {
-  const { highlightedDataset } = useContext(StatsContext);
+  const { highlightedDataset, dispatch } = useContext(StatsContext);
   const [decileOneAvg, setDecileOneAvg] = useState(0);
   const [decileTenAvg, setDecileTenAvg] = useState(0);
   const [estTotal, setEstTotal] = useState(0);
@@ -30,6 +30,11 @@ const SummaryStats = () => {
       setCountryId([country_code, country_name]);
     }
   }, [highlightedDataset]);
+  useEffect(() => {
+    if (Object.keys(highlightedDataset).length > 0) {
+      dispatch({ type: "TOGGLE_LOADING", payload: false });
+    }
+  }, [countryId]);
 
   return (
     <div className="summary-stats">
@@ -56,7 +61,7 @@ const SummaryStats = () => {
       <HighlightedStat
         info="median"
         title="median income/expenditure per day"
-        stat={`$${median}`}
+        stat={median == undefined ? "None recorded" : `$${median}`}
       />
     </div>
   );

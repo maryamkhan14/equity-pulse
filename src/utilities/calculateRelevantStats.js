@@ -18,7 +18,7 @@ const calculateRelevantStats = (dataset) => {
   };
 };
 const getMedian = (median) => {
-  return median == undefined ? "No median recorded." : median.toFixed(2);
+  return median == undefined ? undefined : median.toFixed(2);
 };
 const calculateEstTotal = (population, mean) => {
   return new Intl.NumberFormat().format((population * mean).toFixed(2));
