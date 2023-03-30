@@ -2,21 +2,39 @@
   display: flex;
   border: 1px solid black;
   padding: 0.3em;
+  justify-content: space-around;
+  flex-wrap: wrap;
+  gap: 0.3em;
 }
 .stats-form div {
-  background-color: aqua;
+  display: flex;
+  align-items: center;
+  overflow: hidden;
 }
+
 .stats-form div label {
-  padding: 0.3em;
+  background-color: rgb(116, 0, 0);
+  color: #f9f9f9;
+  padding: 0.3em 0.5em;
+  font-size: 0.8em;
+  font-style: italic;
+  height: 100%;
+  display: flex;
+  align-items: center;
 }
-.stats-form div input {
-  padding: 0.3em;
+.stats-form div input,
+select {
+  padding: 0.4em;
   max-width: 200px;
-  font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
+  font-family: Fira Sans, Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
   font-weight: 400;
   font-synthesis: none;
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   -webkit-text-size-adjust: 100%;
+  border-width: 0 0 1px 0;
+  border-radius: 0;
+  height: 100%;
+  background-color: lightgray;
 }
