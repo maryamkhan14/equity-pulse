@@ -10,7 +10,6 @@ const Main = () => {
   const { dispatch, loading } = useContext(StatsContext);
 
   useEffect(() => {
-    console.log("main called");
     const initialFetch = async () => {
       let all = await fetchCountryStats("all");
       await dispatch({

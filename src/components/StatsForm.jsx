@@ -7,7 +7,7 @@ import { StatsContext } from "../context/StatsContext";
 const StatsForm = () => {
   const [country, setCountry] = useState("");
   const [welfareMeasure, setWelfareMeasure] = useState("all");
-  const { loading, dispatch } = useContext(StatsContext);
+  const { loading, highlightedDataset, dispatch } = useContext(StatsContext);
 
   useEffect(() => {
     updateDatasets();
@@ -18,11 +18,12 @@ const StatsForm = () => {
   }, [welfareMeasure]);
 
   const updateDatasets = async () => {
-    if (!loading) {
-      let possibleMatches = Object.keys(pairings).filter((countryName) =>
-        countryName.includes(country.toLocaleLowerCase())
-      );
-      if (pairings[country] || possibleMatches.length == 1) {
+    let possibleMatches = Object.keys(pairings).filter((countryName) =>
+      countryName.includes(country.toLocaleLowerCase())
+    );
+
+    if (pairings[country] || possibleMatches.length == 1) {
+      if (pairings[possibleMatches[0]] != highlightedDataset.country_code) {
         dispatch({
           type: "TOGGLE_LOADING",
           payload: true,
@@ -32,8 +33,8 @@ const StatsForm = () => {
           payload: pairings[possibleMatches[0]],
         });
       }
-      dispatch({ type: "FILTER_COUNTRY_NAME", payload: country });
     }
+    dispatch({ type: "FILTER_COUNTRY_NAME", payload: country });
   };
 
   return (

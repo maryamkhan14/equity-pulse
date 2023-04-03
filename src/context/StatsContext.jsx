@@ -20,16 +20,24 @@ export const statsContextReducer = (state, action) => {
         originalDataset: action.payload,
       };
     case "FILTER_COUNTRY_NAME":
-      return {
-        ...state,
-        displayDataset: state.originalDataset.filter((individualDataset) =>
-          individualDataset.country_name
-            .toLocaleLowerCase()
-            .includes(action.payload.toLocaleLowerCase())
-        ),
-      };
+      if (Object.keys(state.originalDataset).length > 0) {
+        return {
+          ...state,
+          displayDataset: state.originalDataset.filter((individualDataset) =>
+            individualDataset.country_name
+              .toLocaleLowerCase()
+              .includes(action.payload.toLocaleLowerCase())
+          ),
+        };
+      } else {
+        return state;
+      }
+
     case "FILTER_WELFARE_TYPE":
-      if (action.payload == "all") {
+      if (
+        action.payload == "all" ||
+        !state.originalDataset.hasOwnProperty("welfare_type")
+      ) {
         return { ...state, displayDataset: state.originalDataset };
       }
       return {
