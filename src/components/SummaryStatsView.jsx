@@ -1,9 +1,11 @@
 import React from "react";
 import "../styling/SummaryStats.css";
 import { useEffect, useContext, useState } from "react";
+import { useParams } from "react-router-dom";
+import extractRelevantDetails from "../utilities/extractRelevantDetails";
+
 import { StatsContext } from "../context/StatsContext";
 import HighlightedStat from "./HighlightedStat";
-import extractRelevantDetails from "../utilities/extractRelevantDetails";
 import HighlightedChart from "./HighlightedChart";
 
 const SummaryStatsView = () => {
@@ -15,6 +17,7 @@ const SummaryStatsView = () => {
   const [deciles, setDeciles] = useState([]);
   const [countryId, setCountryId] = useState([]);
 
+  let { countryCode } = useParams();
   useEffect(() => {
     if (Object.keys(highlightedDataset).length > 0) {
       let {
@@ -34,11 +37,18 @@ const SummaryStatsView = () => {
       setDeciles(deciles);
     }
   }, [highlightedDataset]);
+
   useEffect(() => {
     if (Object.keys(highlightedDataset).length > 0) {
       dispatch({ type: "TOGGLE_LOADING", payload: false });
     }
   }, [countryId]);
+
+  useEffect(
+    () =>
+      dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: countryCode }),
+    [countryCode]
+  );
 
   return (
     <div className="summary-stats">

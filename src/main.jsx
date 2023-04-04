@@ -5,6 +5,7 @@ import { StatsContextProvider } from "./context/StatsContext";
 import "./index.css";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Layout from "./components/Layout";
+import SummaryStatsView from "./components/SummaryStatsView";
 
 ReactDOM.createRoot(document.getElementById("root")).render(
   <StatsContextProvider>
@@ -15,7 +16,7 @@ ReactDOM.createRoot(document.getElementById("root")).render(
           <Route
             index={false}
             path="/countrydetails/:countryCode"
-            element={<App />}
+            element={<SummaryStatsView />}
           />
         </Route>
       </Routes>
