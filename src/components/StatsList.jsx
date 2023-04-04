@@ -1,5 +1,6 @@
 import React from "react";
 import { useContext } from "react";
+import { Link } from "react-router-dom";
 import { StatsContext } from "../context/StatsContext";
 import extractRelevantDetails from "../utilities/extractRelevantDetails";
 import "../styling/StatsList.css";
@@ -30,7 +31,11 @@ const StatsList = () => {
               return (
                 <tr key={country_code}>
                   <td>
-                    <b>{country_name}</b>
+                    <b>
+                      <Link to={`/countryDetails/${country_code}`}>
+                        {country_name}
+                      </Link>
+                    </b>
                   </td>
                   <td>${median}</td>
                   <td>${decileOneAvg}</td>
