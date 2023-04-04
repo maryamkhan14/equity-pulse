@@ -1,0 +1,5 @@
+.chart {
+  display: flex;
+  max-width: 100vw;
+  overflow: hidden;
+}

@@ -4,6 +4,7 @@ import { useEffect, useContext, useState } from "react";
 import { StatsContext } from "../context/StatsContext";
 import HighlightedStat from "./HighlightedStat";
 import extractRelevantDetails from "../utilities/extractRelevantDetails";
+import HighlightedChart from "./HighlightedChart";
 
 const SummaryStats = () => {
   const { highlightedDataset, dispatch } = useContext(StatsContext);
@@ -11,6 +12,7 @@ const SummaryStats = () => {
   const [decileTenAvg, setDecileTenAvg] = useState(0);
   const [estTotal, setEstTotal] = useState(0);
   const [median, setMedian] = useState(0);
+  const [deciles, setDeciles] = useState([]);
   const [countryId, setCountryId] = useState([]);
 
   useEffect(() => {
@@ -22,12 +24,14 @@ const SummaryStats = () => {
         estTotal,
         country_code,
         country_name,
+        deciles,
       } = extractRelevantDetails(highlightedDataset);
       setDecileOneAvg(decileOneAvg);
       setDecileTenAvg(decileTenAvg);
       setEstTotal(estTotal);
       setMedian(median);
       setCountryId([country_code, country_name]);
+      setDeciles(deciles);
     }
   }, [highlightedDataset]);
   useEffect(() => {
@@ -62,6 +66,12 @@ const SummaryStats = () => {
         info="median"
         title="median income/expenditure per day"
         stat={median == undefined ? "None recorded" : `$${median}`}
+      />
+
+      <HighlightedChart
+        info="deciles"
+        title="distribution of wealth"
+        stat={deciles}
       />
     </div>
   );
