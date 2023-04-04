@@ -6,7 +6,7 @@ import HighlightedStat from "./HighlightedStat";
 import extractRelevantDetails from "../utilities/extractRelevantDetails";
 import HighlightedChart from "./HighlightedChart";
 
-const SummaryStats = () => {
+const SummaryStatsView = () => {
   const { highlightedDataset, dispatch } = useContext(StatsContext);
   const [decileOneAvg, setDecileOneAvg] = useState(0);
   const [decileTenAvg, setDecileTenAvg] = useState(0);
@@ -77,4 +77,4 @@ const SummaryStats = () => {
   );
 };
 
-export default SummaryStats;
+export default SummaryStatsView;

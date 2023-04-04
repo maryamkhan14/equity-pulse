@@ -1,7 +1,7 @@
 import React from "react";
 import "../styling/Main.css";
 import AllStats from "./AllStats";
-import SummaryStats from "./SummaryStats";
+import SummaryStatsView from "./SummaryStatsView";
 import { useContext, useEffect } from "react";
 import fetchCountryStats from "../utilities/fetchData";
 import { StatsContext } from "../context/StatsContext";
@@ -17,7 +17,7 @@ const Main = () => {
         payload: all,
       });
 
-      dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: "USA" });
+      //dispatch({ type: "UPDATE_HIGHLIGHTED_DATASET", payload: "USA" });
     };
     initialFetch().then(() =>
       dispatch({ type: "TOGGLE_LOADING", payload: false })
@@ -26,7 +26,6 @@ const Main = () => {
 
   return (
     <div className={`main ${loading && "loading"}`}>
-      <SummaryStats />
       <AllStats />
     </div>
   );

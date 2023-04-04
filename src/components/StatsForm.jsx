@@ -1,13 +1,13 @@
 import React from "react";
 import "../styling/StatsForm.css";
 import { useState, useContext, useEffect } from "react";
-import fetchCountryStats from "../utilities/fetchData";
-import pairings from "../constants/countryPairings";
+//import fetchCountryStats from "../utilities/fetchData";
+//import pairings from "../constants/countryPairings";
 import { StatsContext } from "../context/StatsContext";
 const StatsForm = () => {
   const [country, setCountry] = useState("");
   const [welfareMeasure, setWelfareMeasure] = useState("all");
-  const { loading, highlightedDataset, dispatch } = useContext(StatsContext);
+  const { loading, dispatch } = useContext(StatsContext);
 
   useEffect(() => {
     updateDatasets();
@@ -18,7 +18,7 @@ const StatsForm = () => {
   }, [welfareMeasure]);
 
   const updateDatasets = async () => {
-    let possibleMatches = Object.keys(pairings).filter((countryName) =>
+    /**let possibleMatches = Object.keys(pairings).filter((countryName) =>
       countryName.includes(country.toLocaleLowerCase())
     );
 
@@ -33,7 +33,7 @@ const StatsForm = () => {
           payload: pairings[possibleMatches[0]],
         });
       }
-    }
+    }*/
     dispatch({ type: "FILTER_COUNTRY_NAME", payload: country });
   };
 
